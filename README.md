@@ -14,7 +14,7 @@
 ---
 ## Regras de negócio
 
-- [ x ] Não deve ser possível cadastrar uam conta com CPF já existente
+- [x] Não deve ser possível cadastrar uam conta com CPF já existente
 - [ ] Não deve ser possível fazer depósito numa conta não existente
 - [ ] Não deve ser possível buscar extrato numa conta não existente
 - [ ] Não deve ser possível fazer saque numa conta não existemte
