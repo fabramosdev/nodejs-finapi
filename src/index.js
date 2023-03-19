@@ -6,12 +6,16 @@ const customers = []
 
 app.use(express.json())
 
-/**
- * cpf - string
- * name - string
- * id - uuid
- * statement - Array
- */
+// Middleware
+function verifyIfExistAccountCPF(request, response, next) {
+    const { cpf } = request.headers
+    const customer = customers.find(customer => customer.cpf === cpf)
+    if(!customer) {
+        return response.status(400).json({error: "Customer not found!"})
+    }
+    request.customer = customer
+    return next()
+}
 app.post("/account",
     (request, response) => {
         const {cpf, name} = request.body
@@ -31,6 +35,11 @@ app.post("/account",
 
         return response.status(201).send()
     })
+
+app.get("/statement", verifyIfExistAccountCPF, (request, response) => {
+    const { customer } = request
+    return response.json(customer.statement)
+})
 
 app.listen(port, () => {
     console.log(`Api started on port ${port}`)
